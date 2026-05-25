@@ -1,5 +1,5 @@
 /******************************************************
- * LED Billboard (ESP8266 D1 mini + MAX7219 FC-16)
+ * LED Billboard (ESP32-S2 mini + MAX7219 FC-16)
  *
  * Minimal web UI for changing text, brightness, speed,
  * and scroll effect on a 4-module 32x8 LED matrix.
@@ -7,8 +7,8 @@
 
 #include <Arduino.h>
 #include <SPI.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
+#include <WiFi.h>
+#include <WebServer.h>
 
 #include <MD_Parola.h>
 #include <MD_MAX72xx.h>
@@ -16,10 +16,12 @@
 // --------- MAX7219 / Parola configuration ---------
 #define HARDWARE_TYPE  MD_MAX72XX::FC16_HW
 #define MAX_DEVICES    4           // 4 x 8x8 = 32x8
-// ESP8266 hardware SPI pins: MOSI=D7, SCK=D5
-#define CS_PIN         D6          // Chip Select
+// LOLIN/WEMOS ESP32-S2 mini default SPI pins.
+#define CLK_PIN        7
+#define DATA_PIN       11
+#define CS_PIN         12          // SS / Chip Select
 
-MD_Parola P = MD_Parola(HARDWARE_TYPE, CS_PIN, MAX_DEVICES);
+MD_Parola P = MD_Parola(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES);
 
 // --------- WiFi configuration ---------
 // Leave these blank to use fallback AP mode.
@@ -30,10 +32,10 @@ const char* AP_SSID = "HD-Billboard";
 const char* AP_PASS = "change-me"; // Must be at least 8 characters.
 
 // --------- Web server ---------
-ESP8266WebServer server(80);
+WebServer server(80);
 
 // --------- Display parameters ---------
-String g_text = "Hello from ESP8266!";
+String g_text = "Hello from ESP32-S2!";
 uint8_t g_brightness = 8;       // 0..15
 uint8_t g_speed = 80;           // 10..200 (Parola speed)
 textEffect_t g_effect = PA_SCROLL_LEFT;
