@@ -1,3 +1,0 @@
-# Schematic Prompt
-
-Create a clean wiring schematic for an ESP32-S2 mini, preferably labeled "LOLIN/WEMOS S2 mini", controlling a 4-module MAX7219 FC-16 LED matrix billboard. Show the ESP32-S2 mini connected to the chained MAX7219 matrix as a 32x8 display. Wire GPIO11 / MOSI to DIN, GPIO7 / SCK to CLK, GPIO12 / SS to CS or LOAD, 5V to VCC, and GND to GND. Show USB-C power into the ESP32-S2 mini, and clearly mark that the ESP32-S2 mini and LED matrix must share common ground. Add a note that the ESP32-S2 hosts a small WiFi/AP web UI for changing text, brightness, scroll speed, and effect. Use a beginner-friendly layout with clean labels, compact desk-billboard proportions, and no breadboard clutter.
